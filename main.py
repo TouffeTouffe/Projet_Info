@@ -1,85 +1,51 @@
-import numpy as np
-
-class grille:
-    def __init__(self):
-        self.col = []
-
-    def ajout_col(self):
-        c=col()
-        self.col.append(c)
-
-    def import_grille(self,g,x,y):
-        self.dimx=x #taille d'un bloc
-        self.dimy=y
-        for i in range(x*y):
-            self.ajout_col()
-        for c in self.col:
-            for i in range(x*y):
-                c.ajout_case()
-        for i in range (x*y):
-            for j in range(x*y):
-                if g[i][j]!=0:
-                    self.col[i].cases[j].sol=g[i][j]
-                    self.col[i].cases[j].possibilites=[]
-
-    def __str__(self):
-        l=""
-        for i in range(self.dimx):
-            if i%self.dimy==0:
-                l+="---------"
-            l+="\n"
-            l+="---------\n"
-            for j in range(self.dimy):
-                if j%self.dimx==0:
-                    l += "|"
-                l+="|"
-                l+=str(self.blocs[self.dimx*j+self.dimy*i-1].cases[0].sol)
-            l+="||"
-        l+="---------"
-        return l
-
-class col:
-    def __init__(self):
-        self.cases=[]
-
-    def ajout_case(self):
-        c=case()
-        self.cases.append(c)
-
-
-
 class case:
-    def __init__(self):
-        self.sol=0
-        self.possibilites=[1,2,3,4,5,6,7,8,9]
+    def __init__(self,n):
+        self.sol = 0
+        self.possibilites = list(range(1,n+1))
 
     def __repr__(self):
-        return str(self.sol) #pour afficher la solution dans le print grille
+        return str(self.sol)  # pour afficher la solution dans le print grille
 
-    def set(self,i):
-        self.sol=i
-        self.possibilites=[]
+    def set(self, i):
+        self.sol = i
+        self.possibilites = []
 
+
+# on utilise les listes par simplicité mais surtout grâce au fait que plusieurs listes peuvent pointer le même objet (ie, une case)
 class grille2(list):
     def __init__(self):
         super().__init__()
 
-    def importGrille(self,g,X,Y):
-        self.x=X
-        self.y=Y
-        for i in range (X*Y):
-            L=[]
-            for j in range (X*Y):
-                c=case()
-                if g[i][j]!=0:
+    def importGrille(self, g, X, Y):
+        self.x = X
+        self.y = Y
+        n=X*Y
+        for i in range(n):
+            L = []
+            for j in range(n):
+                c = case(n)
+                if g[i][j] != 0:
                     c.set(g[i][j])
-                    if g[i][j]>= X*Y:
-                        raise ValueError("Nombre trop gros") #on ne peut pas faire rentrer un nombre >n dans un carré à n cases
+                    if g[i][j] > X * Y:
+                        raise ValueError("Nombre trop gros")  # on ne peut pas faire rentrer un nombre >n dans un carré à n cases
                 L.append(c)
             self.append(L)
 
+    def ligne(self,i):
+        return [self[i]]
 
+    def colonne(self,j):
+        return [col[j] for col in self]
 
-g=grille2()
-G=[[1,0,3,4],[1,2,3,0],[0,2,3,4],[0,2,3,4]]
-g.importGrille(G,2,2)
+    def bloc(self,k):
+        B=[]
+        for i in range(self.y):
+            L=[]
+            for j in range(self.x):
+                L.append(k%self.y+j)
+            B.append(L)
+        return B
+
+g = grille2()
+G = [[1, 0, 3, 4], [1, 2, 3, 0], [0, 2, 3, 4], [0, 2, 3, 4]]
+g.importGrille(G, 2, 2)
