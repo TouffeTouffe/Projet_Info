@@ -56,6 +56,28 @@ class case:
     def __int__(self):
         return self.sol
 
-g=grille()
-G=np.array([[1,2,3,4],[1,2,3,4],[1,2,3,4],[1,2,3,4]])
-g.import_grille(G,2,2)
+    def set(self,i):
+        self.sol=i
+        self.possibilites=[]
+
+class grille2(list):
+    def __init__(self):
+        super().__init__()
+
+    def importGrille(self,g,X,Y):
+        self.x=X
+        self.y=Y
+        for i in range (X*Y):
+            L=[]
+            for j in range (X*Y):
+                c=case()
+                if g[i][j]!=0:
+                    c.set(g[i][j])
+                L.append(c)
+            self.append(L)
+
+
+
+g=grille2()
+G=[[1,0,3,4],[1,2,3,0],[0,2,3,4],[0,2,3,4]]
+g.importGrille(G,2,2)
