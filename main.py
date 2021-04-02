@@ -53,8 +53,8 @@ class case:
         self.sol=0
         self.possibilites=[1,2,3,4,5,6,7,8,9]
 
-    def __int__(self):
-        return self.sol
+    def __repr__(self):
+        return str(self.sol) #pour afficher la solution dans le print grille
 
     def set(self,i):
         self.sol=i
@@ -73,6 +73,8 @@ class grille2(list):
                 c=case()
                 if g[i][j]!=0:
                     c.set(g[i][j])
+                    if g[i][j]>= X*Y:
+                        raise ValueError("Nombre trop gros") #on ne peut pas faire rentrer un nombre >n dans un carré à n cases
                 L.append(c)
             self.append(L)
 
