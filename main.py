@@ -40,10 +40,8 @@ class grille2(list):
     def bloc(self,k):
         B=[]
         for i in range(self.y):
-            L=[]
             for j in range(self.x):
-                L.append(k%self.y+j)
-            B.append(L)
+                B.append()
         return B
 
 g = grille2()
