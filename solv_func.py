@@ -45,7 +45,7 @@ class SolvFunc:
             C=[]
             for cases in col_g:
                 if p in cases.possibilites and cases != c:
-                    C.append(cases)  # les cases qui ont aussi cette possibilité
+                    C.append(cases)  # les cases de la même colonne qui ont aussi cette possibilité
             b=[]
             for cases in C:
                 if cases.bloc_ap not in B:
@@ -59,6 +59,28 @@ class SolvFunc:
                             cases_autorisees.append(case)
                     for case in cases_autorisees:
                         if case.colonne_ap != col_g:
+                            flag=False
+            if flag:
+                c.possibilites.remove(p)
+        for p in c.possibilites:
+            flag = True
+            C=[]
+            for cases in lig_g:
+                if p in cases.possibilites and cases != c:
+                    C.append(cases)  # les cases de la même ligne qui ont aussi cette possibilité
+            b=[]
+            for cases in C:
+                if cases.bloc_ap not in B:
+                    b.append(cases.bloc_ap)
+            if len(b)==1:
+                if b[0] != blc:
+                    B=self.bloc(b[0])
+                    cases_autorisees=[]
+                    for case in B:
+                        if p in case.possibilites:
+                            cases_autorisees.append(case)
+                    for case in cases_autorisees:
+                        if case.ligne_ap != col_g:
                             flag=False
             if flag:
                 c.possibilites.remove(p)
