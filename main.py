@@ -12,7 +12,7 @@ class case:
 
 
 # on utilise les listes par simplicité mais surtout grâce au fait que plusieurs listes peuvent pointer le même objet (ie, une case)
-class grille2(list):
+class grille(list):
     def __init__(self):
         super().__init__()
 
@@ -41,9 +41,9 @@ class grille2(list):
         B=[]
         for i in range(self.y):
             for j in range(self.x):
-                B.append()
+                B.append(self[i][j])
         return B
 
-g = grille2()
+g = grille()
 G = [[1, 0, 3, 4], [1, 2, 3, 0], [0, 2, 3, 4], [0, 2, 3, 4]]
 g.importGrille(G, 2, 2)
