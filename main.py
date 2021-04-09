@@ -11,7 +11,7 @@ class case:
 
     def set(self, i):
         self.sol = i
-        self.possibilites = []
+        self.possibilites =  []
 
 
 # on utilise les listes par simplicité mais surtout grâce au fait que plusieurs listes peuvent pointer le même objet (ie, une case)
