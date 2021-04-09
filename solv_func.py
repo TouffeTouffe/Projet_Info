@@ -13,8 +13,9 @@ def remove_pos(l):
             if v in i.possiblites:
                 i.possiblites.remove(v)
 
-def celib(l):
-    pos_unique=[]
+
+def celib(l):  # https://www.sudoku129.com/grilles/tips_1.php
+    pos_unique = []
     for i in l:
         for j in i.possiblites:
             if j not in pos_unique:
@@ -29,3 +30,6 @@ def celib(l):
     remove_pos(l)
 
 
+def candidat_bloque(c):  # https://www.sudoku129.com/grilles/tips_2.php
+    col, lig, blc = c.colonne, c.ligne, c.bloc
+    for s in c.sol:

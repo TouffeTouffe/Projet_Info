@@ -1,7 +1,10 @@
 class case:
-    def __init__(self,n):
+    def __init__(self,n,l,c,b):
         self.sol = 0
         self.possibilites = list(range(1,n+1))
+        self.colonne_ap=c
+        self.ligne_ap=l
+        self.bloc_ap=b
 
     def __repr__(self):
         return str(self.sol)  # pour afficher la solution dans le print grille
@@ -23,7 +26,8 @@ class grille(list):
         for i in range(n):
             L = []
             for j in range(n):
-                c = case(n)
+                b=0 #à def
+                c = case(n,i,j,b)
                 if g[i][j] != 0:
                     c.set(g[i][j])
                     if g[i][j] > X * Y:
@@ -32,7 +36,7 @@ class grille(list):
             self.append(L)
 
     def ligne(self,i):
-        return [self[i]]
+        return self[i]
 
     def colonne(self,j):
         return [col[j] for col in self]
