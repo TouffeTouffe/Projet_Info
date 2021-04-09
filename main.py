@@ -26,7 +26,7 @@ class grille(list):
         for i in range(n):
             L = []
             for j in range(n):
-                b=0 #à def
+                b = self.y*(j//self.y)+(i//self.x)
                 c = case(n,i,j,b)
                 if g[i][j] != 0:
                     c.set(g[i][j])
