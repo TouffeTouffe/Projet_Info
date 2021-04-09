@@ -40,14 +40,20 @@ class grille(list):
 
     def colonne(self,j):
         return [col[j] for col in self]
-
+    
     def bloc(self,k):
         B=[]
+        X0=((k)//self.y)
+        Y0=((k)%self.x)
+        x0=X0*self.x
+        y0=self.y*Y0        
         for i in range(self.y):
             for j in range(self.x):
-                B.append(self[i][j])
+                B.append(self[x0+i][y0+j])
+
         return B
 
 g = grille()
 G = [[1, 0, 3, 4], [1, 2, 3, 0], [0, 2, 3, 4], [0, 2, 3, 4]]
 g.importGrille(G, 2, 2)
+print(g.bloc(2))
