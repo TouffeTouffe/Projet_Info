@@ -39,3 +39,4 @@ class SolvFunc:
     def candidat_bloque(self,c):  # https://www.sudoku129.com/grilles/tips_2.php
         col, lig, blc = c.colonne, c.ligne, c.bloc
         for p in c.possibilites:
+            self.g
