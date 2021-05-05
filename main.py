@@ -18,6 +18,8 @@ class case:
 class grille(list):
     def __init__(self):
         super().__init__()
+        self.x=0
+        self.y=0
 
     def importGrille(self, g, X, Y):
         self.x = X
@@ -40,11 +42,14 @@ class grille(list):
 
     def colonne(self,j):
         return [col[j] for col in self]
+
+    def getBlocIndice(self,i,j):
+        #bobo tète
     
     def bloc(self,k):
         B=[]
-        X0=((k)//self.y)
-        Y0=((k)%self.x)
+        X0=k//self.y
+        Y0=k % self.x
         x0=X0*self.x
         y0=self.y*Y0        
         for i in range(self.y):
