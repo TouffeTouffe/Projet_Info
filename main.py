@@ -49,17 +49,17 @@ class grille(list):
 
     def bloc(self, k):
         B = []
-        X=self.x
-        Y=self.y
-        n=X*Y
+        X = self.x
+        Y = self.y
+        n = X * Y
         for i in range(n):
             for j in range(n):
-                if self.getBlocIndice(i,j)==k:
+                if self.getBlocIndice(i, j) == k:
                     B.append(self[i][j])
 
         return B
 
 
 g = grille()
-G = [[1, 2, 3, 0], [3, 4, 1, 0], [4, 1, 2, 3], [0, 0, 4, 1]]
+G = [[1, 2, 3, 4], [3, 4, 1, 2], [4, 1, 2, 3], [2, 0, 4, 1]]
 g.importGrille(G, 2, 2)

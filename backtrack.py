@@ -12,9 +12,15 @@ class backtrack:
         return True
 
     def num_valide(self, num, x, y):
-        if num in self.grille.colonne(x) or num in self.grille.ligne(y) or num in self.grille.bloc(
-                self.grille.getBlocIndice(x, y)):
-            return False
+        for i in self.grille.colonne(x):
+            if i.sol == num:
+                return False
+        for i in self.grille.ligne(y):
+            if i.sol == num:
+                return False
+        for i in self.grille.bloc(self.grille.getBlocIndice(x, y)):
+            if i.sol == num:
+                return False
         return True
 
     def vide(self):
@@ -22,7 +28,7 @@ class backtrack:
         for i in range(n):
             for j in range(n):
                 if self.grille[i][j].sol == 0:
-                    return (i, j)
+                    return i, j
         return None
 
     def resoudre(self):
@@ -34,9 +40,9 @@ class backtrack:
         for num in range(1, n + 1):
             if self.num_valide(num, i, j):
                 self.grille[i][j].set(num)
-
-            if self.resoudre():
-                return True
-
-            self.grille[i][j].set(0)  # ça pas marche
+                if self.resoudre():
+                    return True
+                self.grille[i][j].set(0)  # ça pas marche
         return False
+
+# https://www.techwithtim.net/tutorials/python-programming/sudoku-solver-backtracking/
