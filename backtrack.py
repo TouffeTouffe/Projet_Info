@@ -22,21 +22,21 @@ class backtrack:
         for i in range(n):
             for j in range(n):
                 if self.grille[i][j].sol == 0:
-                    return i,j
+                    return (i, j)
         return None
 
     def resoudre(self):
-            case=self.vide
-            if not case:
+        case = self.vide()
+        if not case:
+            return True
+        i, j = case
+        n = self.grille.x * self.grille.y
+        for num in range(1, n + 1):
+            if self.num_valide(num, i, j):
+                self.grille[i][j].set(num)
+
+            if self.resoudre():
                 return True
-            i,j=case
-            n = self.grille.x * self.grille.y
-            for num in range(1,n+1):
-                if self.num_valide(num,i,j):
-                    self.grille[i][j].set(num)
 
-                if self.resoudre():
-                    return True
-
-                self.grille[i][j].set(0) #ça pas marche
-            return False
+            self.grille[i][j].set(0)  # ça pas marche
+        return False
