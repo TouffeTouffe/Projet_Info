@@ -61,5 +61,7 @@ class grille(list):
 
 
 g = grille()
-G = [[1, 2, 3, 4], [3, 4, 1, 2], [4, 1, 2, 3], [2, 0, 4, 1]]
+G = [[1, 0, 3, 0], [3, 0, 1, 2], [4, 0, 2, 3], [2, 0, 4, 1]]
 g.importGrille(G, 2, 2)
+from backtrack import backtrack
+solv=backtrack(g)

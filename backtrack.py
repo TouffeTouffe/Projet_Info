@@ -12,10 +12,10 @@ class backtrack:
         return True
 
     def num_valide(self, num, x, y):
-        for i in self.grille.colonne(x):
+        for i in self.grille.colonne(y):
             if i.sol == num:
                 return False
-        for i in self.grille.ligne(y):
+        for i in self.grille.ligne(x):
             if i.sol == num:
                 return False
         for i in self.grille.bloc(self.grille.getBlocIndice(x, y)):
@@ -40,7 +40,7 @@ class backtrack:
         for num in range(1, n + 1):
             if self.num_valide(num, i, j):
                 self.grille[i][j].set(num)
-                if self.resoudre():
+                if self.resoudre():  # plus de cases vides
                     return True
                 self.grille[i][j].set(0)  # ça pas marche
         return False
