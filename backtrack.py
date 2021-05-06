@@ -31,4 +31,12 @@ class backtrack:
                 return True
             i,j=case
             n = self.grille.x * self.grille.y
-            for i in range(n):
+            for num in range(1,n+1):
+                if self.num_valide(num,i,j):
+                    self.grille[i][j].set(num)
+
+                if self.resoudre():
+                    return True
+
+                self.grille[i][j].set(0) #ça pas marche
+            return False

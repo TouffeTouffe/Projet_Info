@@ -1,10 +1,10 @@
 class case:
-    def __init__(self,n,l,c,b):
+    def __init__(self,n,l,c,k):
         self.sol = 0
         self.possibilites = list(range(1,n+1))
         self.colonne_ap=c
         self.ligne_ap=l
-        self.bloc_ap=b
+        self.bloc_ap=k
 
     def __repr__(self):
         return str(self.sol)  # pour afficher la solution dans le print grille
@@ -28,8 +28,8 @@ class grille(list):
         for i in range(n):
             L = []
             for j in range(n):
-                b = self.y*(i//self.y)+(j//self.x)
-                c = case(n,i,j,b)
+                k = self.y*(i//self.y)+(j//self.x)
+                c = case(n,i,j,k)
                 if g[i][j] != 0:
                     c.set(g[i][j])
                     if g[i][j] > X * Y:
@@ -44,7 +44,7 @@ class grille(list):
         return [col[j] for col in self]
 
     def getBlocIndice(self,i,j):
-        #bobo tète
+        return self[i][j].bloc_ap
     
     def bloc(self,k):
         B=[]
