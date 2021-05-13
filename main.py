@@ -56,7 +56,6 @@ class grille(list):
             for j in range(n):
                 if self.getBlocIndice(i, j) == k:
                     B.append(self[i][j])
-
         return B
 
 
@@ -64,4 +63,6 @@ g = grille()
 G = [[1, 0, 3, 0], [3, 0, 1, 2], [4, 0, 2, 3], [2, 0, 4, 1]]
 g.importGrille(G, 2, 2)
 from backtrack import backtrack
+from solv_func import SolvFunc
 solv=backtrack(g)
+solv2=SolvFunc(g)
