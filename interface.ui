@@ -24,18 +24,18 @@
    <widget class="QWidget" name="conteneur" native="true">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>30</y>
-      <width>511</width>
-      <height>321</height>
+      <x>0</x>
+      <y>0</y>
+      <width>741</width>
+      <height>571</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>360</y>
+      <x>160</x>
+      <y>590</y>
       <width>432</width>
       <height>25</height>
      </rect>
