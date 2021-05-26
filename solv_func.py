@@ -1,5 +1,6 @@
 import copy
 
+
 class SolvFunc:
 
     def __init__(self, g):
@@ -105,6 +106,6 @@ class SolvFunc:
                 self.celib(self.grille.bloc(i))
             for lignes in self.grille:
                 for cases in lignes:
-                    if cases.sol==0:
+                    if cases.sol == 0:
                         self.candidat_bloque(cases)
             init = False

@@ -9,3 +9,4 @@ class TestGrilleComplete(unittest.TestCase):
     g.importGrille(G, 2, 2)
 
     def testFoolProof(self):
+        pass
