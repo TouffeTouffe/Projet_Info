@@ -66,7 +66,7 @@ class Ui_Menu(object):
 
     def retranslateUi(self, Menu):
         _translate = QtCore.QCoreApplication.translate
-        Menu.setWindowTitle(_translate("Menu", "Sudoku 900"))
+        Menu.setWindowTitle(_translate("Menu", "Sudoku 9000"))
         self.label.setText(_translate("Menu", "Sudoku 9000"))
         self.label_3.setText(_translate("Menu", "Largeur"))
         self.label_2.setText(_translate("Menu", "Hauteur"))
