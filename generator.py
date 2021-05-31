@@ -103,7 +103,7 @@ class Generator:
                 Gbase = grille()
                 SolvFunc(Gbase.importGrille(gbase, XX, YY))
                 Gsolution=Gbase.copy()
-                if SolvFunc(Gbase.importGrille(gbase, XX, YY))==solution:
+                """if SolvFunc(Gbase.importGrille(gbase, XX, YY))==solution:
                     flag=flag and True
                 else:
                     flag=flag and False"""
