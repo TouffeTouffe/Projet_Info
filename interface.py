@@ -1,6 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QDialog, QTableWidgetItem, QMessageBox
 from PyQt5.QtCore import Qt
+from PyQt5 import QtGui
 from sudoku_menu2 import Ui_Menu
 from sudoku_jeu import Ui_Play
 from sudoku_solver import Ui_Solver
@@ -16,6 +17,7 @@ class Menu(QDialog, Ui_Menu):
         self.setupUi(self)
         self.play_btn.clicked.connect(self.openPlay)
         self.resoudre_btn.clicked.connect(self.openSolver)
+        self.setWindowIcon(QtGui.QIcon('icone.jpg'))
 
     def openPlay(self):
         global x
