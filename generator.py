@@ -99,11 +99,11 @@ class Generator:
                 flag=False
                 gbase[c][d]=sauvegarde
                 pass
-            for i in range(10):
+            """for i in range(10):
                 Gbase = grille()
-                solution=SolvFunc(Gbase.importGrille(gbase, XX, YY))
-                Gbase = grille()
-                """if SolvFunc(Gbase.importGrille(gbase, XX, YY))==solution:
+                SolvFunc(Gbase.importGrille(gbase, XX, YY))
+                Gsolution=Gbase.copy()
+                if SolvFunc(Gbase.importGrille(gbase, XX, YY))==solution:
                     flag=flag and True
                 else:
                     flag=flag and False"""
@@ -122,11 +122,8 @@ class Generator:
         Gfin=grille()
         Gfin.importGrille(gbase, XX, YY)
         print(Gfin)
+        return Gfin
 
 
-
-gene=Generator(3,2)
-gene.generate()
-
-
-
+# gene=Generator(3,2)
+# gene.generate()
