@@ -31,9 +31,9 @@ class Generator:
         gbase=[]
 
 
-        """gbase = [[1, 2, 3, 4, 5, 6, 7, 8, 9], [2, 3, 4, 5, 6, 7, 8, 9, 1], [3, 4, 5, 6, 7, 8, 9, 1, 2],
-                 [4, 5, 6, 7, 8, 9, 1, 2, 3], [5, 6, 7, 8, 9, 1, 2, 3, 4], [6, 7, 8, 9, 1, 2, 3, 4, 5],
-                 [7, 8, 9, 1, 2, 3, 4, 5, 6], [8, 9, 1, 2, 3, 4, 5, 6, 7], [9, 1, 2, 3, 4, 5, 6, 7, 8]]
+        """gbase = [[1, 2, 3, 4, 5, 6, 7, 8, 9], [4, 5, 6, 7, 8, 9, 1, 2, 3], [7, 8, 9, 1, 2, 3, 4, 5, 6], 
+                    [2, 3, 4, 5, 6, 7, 8, 9, 1], [3, 4, 5, 6, 7, 8, 9, 1, 2], [5, 6, 7, 8, 9, 1, 2, 3, 4], 
+                    [6, 7, 8, 9, 1, 2, 3, 4, 5], [8, 9, 1, 2, 3, 4, 5, 6, 7], [9, 1, 2, 3, 4, 5, 6, 7, 8]]
         """
 
 
@@ -52,7 +52,7 @@ class Generator:
             gbase.append(lignebase)
 
 
-        print(gbase)
+
         lN=range(n)
         lXX=range(XX)
         lYY=range(YY)
@@ -63,14 +63,14 @@ class Generator:
             a,b=random.choice(lN),random.choice(lYY)
 
             gbase[a],gbase[a//YY*YY+b]=gbase[a//YY*YY+b],gbase[a]
-        print(gbase)
+
         for i in range(1):
             a, b = random.choice(lN), random.choice(lXX)
             for j in range(n):
                 gbase[j][a], gbase[j][a//XX*XX+b]= gbase[j][a//XX*XX+b], gbase[j][a]
 
 
-        print(gbase)
+
 
 
 
@@ -86,10 +86,10 @@ class Generator:
         f=0
 
         Lindices=range(n)
-        print("n",n)
+
         if self.level==1:
             nbtrous=int((n**1.5))
-            print("nb",nbtrous)
+
         cpt=0
         flag=True
         while cpt<nbtrous:
@@ -98,7 +98,7 @@ class Generator:
             while [c,d] in Ltrous:
                 c,d=random.choice(Lindices),random.choice(Lindices)
 
-            print(c,d)
+
             sauvegarde=gbase[c][d]
             gbase[c][d]=0
             try:
@@ -117,20 +117,20 @@ class Generator:
                 else:
                     flag=flag and False"""
 
-            print(flag)
+
             if flag==True:
                 cpt+=1
             else:
                 flag=True
-            print(flag)
 
-            print(cpt)
-        print(gbase)
+
+
+
         Gfin=grille()
         Gfin.importGrille(gbase, XX, YY)
         Gfin=grille()
         Gfin.importGrille(gbase, XX, YY)
-        print(Gfin)
+
         return Gfin
 
 gene=Generator(3,3)
