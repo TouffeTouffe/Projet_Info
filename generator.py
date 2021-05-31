@@ -1,6 +1,6 @@
 import random
 from main import grille,case
-import solv_func
+from solv_func import SolvFunc
 
 
 
@@ -70,43 +70,62 @@ class Generator:
 
 
 
-        print(Gbase)
 
 
         nbtrous=0
         Ltrous=[]
         sauvegarde=0
-        i=0
-        j=0
-        l=[1,2,3,4,5,6,7,8,9]
+        c=0
+        d=0
+
+        Lindices=range(n)
+        print("n",n)
         if self.level==1:
-            nbtrous=30
+            nbtrous=int((n**1.5))
+            print("nb",nbtrous)
         cpt=0
         flag=True
         while cpt<nbtrous:
-            while [i,j] in Ltrous:
-                i,j=random.choice(l),random.choice(l)
-            sauvegarde=gbase[i][j]
-            gbase[i][j]=0
+            c, d = random.choice(Lindices), random.choice(Lindices)
+            while [c,d] in Ltrous:
+                c,d=random.choice(Lindices),random.choice(Lindices)
+            print(c,d)
+            sauvegarde=gbase[c][d]
+            gbase[c][d]=0
             try:
-                solution=solv_func.SolvFunc.solve(Gbase.importGrille(gbase, XX, YY))
+                Gbase=grille()
+                solution=SolvFunc(Gbase.importGrille(gbase, XX, YY))
             except ValueError:
                 flag=False
-                gbase[i][j]=sauvegarde
+                gbase[c][d]=sauvegarde
                 pass
             for i in range(10):
-                if solution!=solv_func.SolvFunc.solve(Gbase.importGrille(gbase, XX, YY)):
-                    flag=False
+                Gbase = grille()
+                solution=SolvFunc(Gbase.importGrille(gbase, XX, YY))
+                Gbase = grille()
+                """if SolvFunc(Gbase.importGrille(gbase, XX, YY))==solution:
+                    flag=flag and True
+                else:
+                    flag=flag and False"""
+
+            print(flag)
             if flag==True:
                 cpt+=1
             else:
                 flag=True
+            print(flag)
 
-        Gbase.importGrille(gbase, XX, YY)
+            print(cpt)
+        print(gbase)
+        Gfin=grille()
+        Gfin.importGrille(gbase, XX, YY)
+        Gfin=grille()
+        Gfin.importGrille(gbase, XX, YY)
+        print(Gfin)
 
 
 
-gene=Generator(3,3)
+gene=Generator(3,2)
 gene.generate()
 
 
