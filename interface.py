@@ -2,13 +2,13 @@ import sys
 from PyQt5.QtWidgets import QApplication, QDialog, QTableWidgetItem
 from PyQt5.QtCore import Qt
 from sudoku_menu2 import Ui_Menu
-#from GUI.solver_ui import Ui_Solver
 from sudoku_jeu import Ui_Play
+from sudoku_solver import Ui_Solver
 from PyQt5 import QtCore, QtGui, QtWidgets
 import main
-import solv_func
-import sudoku_jeu
+from solv_func import SolvFunc
 import play
+
 
 class Menu(QDialog, Ui_Menu):
     def __init__(self, parent=None):
@@ -16,91 +16,106 @@ class Menu(QDialog, Ui_Menu):
         self.setupUi(self)
         self.play_btn.clicked.connect(self.openPlay)
         self.solve_btn.clicked.connect(self.openSolver)
-        icon = QtGui.QIcon()
 
     def openPlay(self):
         global x
         global y
-        x = self.lineEdit.text()
-        y = self.lineEdit_2.text()
+        x = int(self.lineEdit_2.text())
+        y = int(self.lineEdit.text())
         self.play = Jeu(self)
         self.play.show()
 
     def openSolver(self):
         global x
         global y
-        x = self.lineEdit.text()
-        y = self.lineEdit_2.text()
-        #self.solver = Solver(self)
+        x = int(self.lineEdit_2.text())
+        y = int(self.lineEdit.text())
+        self.solver = Solver(self)
         self.solver.show()
-
 
 class Jeu(QDialog, Ui_Play):
     def __init__(self, parent=None):
         super(Jeu, self).__init__(parent)
-        self.setupUi(self,x,y)
-        self.squares = [[self.topleft, self.topmiddle, self.topright],
-                        [self.middleleft, self.middlemiddle, self.middleright],
-                        [self.bottomleft, self.bottommiddle, self.bottomright]]
-        self.newClick()
-        self.cancel_btn.clicked.connect(self.close)
-        self.new_btn.clicked.connect(self.newClick)
+        self.setupUi(self, x, y)
+        self.lignes = []
+        self.bloc = []
+        for i in range(x):
+            ligne = []
+            for j in range(y):
+                ligne.append(self.blocs[y * i + j])
+                self.blocs[y * i + j].cellChanged.connect(self.modif)
+            self.bloc.append(ligne)
+            # print(ligne)
+        self.nouvClick()
+        self.annuler_btn.clicked.connect(self.close)
+        self.nouv_btn.clicked.connect(self.nouvClick)
 
-    def newClick(self):
-        puzzle = play.genPuzzle()
-        for r, row in enumerate(self.squares):
-            for c, square in enumerate(row):
-                for i in range(3):
-                    for j in range(3):
-                        val = puzzle[i + r * 3][j + c * 3]
-                        if val != 0:
+    def nouvClick(self):
+        global grille
+        grille = play.genPuzzle()
+        for l, ligne_bloc in enumerate(self.bloc):
+            for b, blocs_cases in enumerate(ligne_bloc):
+                for i in range(y):
+                    for j in range(x):
+                        val = grille[i + l * 3][j + b * 3]
+                        if val != 0:  # si un chiffre est présent dans la grille générée
                             item = QTableWidgetItem(str(val))
                             item.setFlags(Qt.ItemIsSelectable
                                           or Qt.ItemIsEnabled)
                         else:
                             item = QTableWidgetItem("")
-                        square.setItem(i, j, item)
-                square.clearSelection()
+                        blocs_cases.setItem(i, j, item)
+                blocs_cases.clearSelection()
 
-"""
+    def modif(self):
+        #print("modif!")
+        for i in range(x):
+            for j in range(y):
+                try:
+                    val = self.bloc[i][j].currentItem().text()
+                    if val:
+                        cur = self.bloc[i][j].currentColumn()
+                        cur2 = self.bloc[i][j].currentRow()
+                        #print(i*y+j,cur,cur2,val)
+                        grille.bloc[i][cur2 * y + cur].set(val)
+                except AttributeError: # sert lors de l'intialisation de l'ihm
+                    pass
+
 class Solver(QDialog, Ui_Solver):
     def __init__(self, parent=None):
         super(Solver, self).__init__(parent)
-        self.setupUi(self)
+        self.setupUi(self,x,y)
         self.solve_btn.clicked.connect(self.solveClick)
         self.reset_btn.clicked.connect(self.tableWidget.clear)
-        self.cancel_btn.clicked.connect(self.close)
+        self.annuler_btn.clicked.connect(self.close)
 
     def solveClick(self):
-        puzzle = []
-        for i in range(9):
+        grille_ihm = []
+        for i in range(x*y):
             row = []
-            for j in range(9):
+            for j in range(x*y):
                 item = self.tableWidget.item(i, j)
                 if item == None:
-                    item = '0'
+                    item = 0
                 else:
                     item = item.text()
-                if item not in list('123456789'):
-                    item = '0'
+                if int(item) not in range(0,x*y+1):
+                    item = 0
                 row.append(int(item))
-            puzzle.append(row[:])
-        soln = solver.solve(puzzle)
-        self.showSolution(soln)
+            grille_ihm.append(row[:])
+        grille_backend=main.grille()
+        grille_backend.importGrille(grille_ihm,x,y)
+        solv = SolvFunc(grille_backend)
+        self.showSolution(grille_backend)
 
-    def showSolution(self, soln):
-        for i in range(9):
-            for j in range(9):
-                item = QTableWidgetItem(str(soln[i][j]))
+    def showSolution(self, grille):
+        for i in range(x*y):
+            for j in range(x*y):
+                item = QTableWidgetItem(str(grille[i][j].sol))
                 self.tableWidget.setItem(i, j, item)
 
-"""
-def main():
-    app = QApplication(sys.argv)
+if __name__ == '__main__':
+    order66 = QApplication(sys.argv)
     form = Menu()
     form.show()
-    sys.exit(app.exec_())
-
-
-if __name__ == '__main__':
-    main()
+    sys.exit(order66.exec_())
