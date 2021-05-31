@@ -101,9 +101,9 @@ class Generator:
                 pass
             for i in range(10):
                 Gbase = grille()
-                solution=SolvFunc(Gbase.importGrille(gbase, XX, YY))
-                Gbase = grille()
-                """if SolvFunc(Gbase.importGrille(gbase, XX, YY))==solution:
+                SolvFunc(Gbase.importGrille(gbase, XX, YY))
+                Gsolution=Gbase.copy()
+                if SolvFunc(Gbase.importGrille(gbase, XX, YY))==solution:
                     flag=flag and True
                 else:
                     flag=flag and False"""
