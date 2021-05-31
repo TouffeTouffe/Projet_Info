@@ -8,21 +8,22 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_Solver(object):
-    def setupUi(self, Solver,x,y):
+    def setupUi(self, Solver, x, y):
         Solver.setObjectName("Solver")
         Solver.resize(296, 344)
         self.verticalLayout = QtWidgets.QVBoxLayout(Solver)
         self.verticalLayout.setObjectName("verticalLayout")
         self.label = QtWidgets.QLabel(Solver)
         self.label.setStyleSheet("QTableWidget::item { \n"
-"border-left: 2px solid white; \n"
-"border-top: 2px solid white; \n"
-"} \n"
-"QTableWidget{ \n"
-"border-bottom: 2px solid white; \n"
-"border-right: 2px solid white; \n"
-"}")
+                                 "border-left: 2px solid white; \n"
+                                 "border-top: 2px solid white; \n"
+                                 "} \n"
+                                 "QTableWidget{ \n"
+                                 "border-bottom: 2px solid white; \n"
+                                 "border-right: 2px solid white; \n"
+                                 "}")
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
         self.tableWidget = QtWidgets.QTableWidget(Solver)
@@ -34,11 +35,12 @@ class Ui_Solver(object):
         self.tableWidget.setFont(font)
         self.tableWidget.setStyleSheet("")
         self.tableWidget.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
-        self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.AnyKeyPressed|QtWidgets.QAbstractItemView.DoubleClicked|QtWidgets.QAbstractItemView.EditKeyPressed|QtWidgets.QAbstractItemView.SelectedClicked)
+        self.tableWidget.setEditTriggers(
+            QtWidgets.QAbstractItemView.AnyKeyPressed | QtWidgets.QAbstractItemView.DoubleClicked | QtWidgets.QAbstractItemView.EditKeyPressed | QtWidgets.QAbstractItemView.SelectedClicked)
         self.tableWidget.setGridStyle(QtCore.Qt.SolidLine)
         self.tableWidget.setCornerButtonEnabled(True)
-        self.tableWidget.setRowCount(x*y)
-        self.tableWidget.setColumnCount(x*y)
+        self.tableWidget.setRowCount(x * y)
+        self.tableWidget.setColumnCount(x * y)
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.horizontalHeader().setVisible(False)
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
@@ -67,8 +69,8 @@ class Ui_Solver(object):
     def retranslateUi(self, Solver):
         _translate = QtCore.QCoreApplication.translate
         Solver.setWindowTitle(_translate("Solver", "Sudoku 9000 Solver"))
-        self.label.setText(_translate("Solver", "Entrez la grille puis cliquez sur \'Résoudre\' pour afficher la solution."))
+        self.label.setText(
+            _translate("Solver", "Entrez la grille puis cliquez sur \'Résoudre\' pour afficher la solution."))
         self.annuler_btn.setText(_translate("Solver", "Annuler"))
         self.resoudre_btn.setText(_translate("Resoudre", "Résoudre"))
         self.reset_btn.setText(_translate("Solver", "Reset"))
-

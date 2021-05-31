@@ -59,7 +59,7 @@ class Jeu(QDialog, Ui_Play):
         global grille_origine
         gen = generator.Generator(x, y)
         grille = gen.generate()
-        grille_origine=copy.deepcopy(grille)
+        grille_origine = copy.deepcopy(grille)
         for l, ligne_bloc in enumerate(self.bloc):
             for b, blocs_cases in enumerate(ligne_bloc):
                 for i in range(y):
@@ -67,8 +67,7 @@ class Jeu(QDialog, Ui_Play):
                         val = grille.bloc(l * y + b)[x * i + j].sol
                         if val != 0:  # si un chiffre est présent dans la grille générée
                             item = QTableWidgetItem(str(val))
-                            item.setFlags(Qt.ItemIsSelectable
-                                          or Qt.ItemIsEnabled)
+                            item.setFlags(Qt.ItemIsSelectable or Qt.ItemIsEnabled)  # grille d'origine non modifiable
                         else:
                             item = QTableWidgetItem("")
                         blocs_cases.setItem(i, j, item)
@@ -76,15 +75,15 @@ class Jeu(QDialog, Ui_Play):
 
     def modif(self):
         # print("modif!")
-        for i in range(x): # on cherche le bloc modifié
+        for i in range(x):  # on cherche le bloc modifié
             for j in range(y):
                 try:
                     val = self.bloc[i][j].currentItem().text()
-                    if val: #fausse alerte (arrive parfois lorsque que l'on clique sur une autre cellule après avoir entré un nombre)
+                    if val:  # fausse alerte (arrive parfois lorsque que l'on clique sur une autre cellule après avoir entré un nombre)
                         cur = self.bloc[i][j].currentColumn()
                         cur2 = self.bloc[i][j].currentRow()
                         # print(i*y+j,cur,cur2,val)
-                        grille.bloc(i * y + j)[cur2 * x + cur].set(int(val)) #mise à jour de la grille
+                        grille.bloc(i * y + j)[cur2 * x + cur].set(int(val))  # mise à jour de la grille
                         # print(grille)
                 except AttributeError:  # sert lors de l'intialisation de l'ihm
                     pass
@@ -93,7 +92,7 @@ class Jeu(QDialog, Ui_Play):
         grille_copy = copy.deepcopy(grille_origine)
         solver = SolvFunc(grille_copy)
         solver.solve()
-        if grille_copy.compare(grille): #la grille que l'on a rentrée correspond à celle résolue par l'IA
+        if grille_copy.compare(grille):  # la grille que l'on a rentrée correspond à celle résolue par l'IA
             msg = QMessageBox()
             msg.setWindowTitle("Vérification")
             msg.setText("Sudoku réussi, félicitations!")

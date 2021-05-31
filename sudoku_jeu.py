@@ -1,4 +1,4 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 
 
 class Ui_Play(object):
@@ -9,8 +9,8 @@ class Ui_Play(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.gridLayout_2 = QtWidgets.QGridLayout()
         self.gridLayout_2.setObjectName("gridLayout_2")
-        self.blocs=[]
-        #print("x=", x, " y=", y)
+        self.blocs = []
+        # print("x=", x, " y=", y)
         for i in range(x * y):
             self.blocs.append(QtWidgets.QTableWidget(Jeu))
             self.blocs[i].setRowCount(y)
@@ -21,7 +21,7 @@ class Ui_Play(object):
             self.blocs[i].horizontalHeader().setMinimumSectionSize(23)
             self.blocs[i].verticalHeader().setVisible(False)
             self.gridLayout_2.addWidget(self.blocs[i], i // y, i % y, 1, 1)
-            #print(i//(y),i%y)
+            # print(i//(y),i%y)
         self.verticalLayout.addLayout(self.gridLayout_2)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
