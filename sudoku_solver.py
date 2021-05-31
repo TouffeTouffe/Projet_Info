@@ -54,10 +54,10 @@ class Ui_Solver(object):
         self.annuler_btn = QtWidgets.QPushButton(Solver)
         self.annuler_btn.setObjectName("annuler_btn")
         self.horizontalLayout.addWidget(self.annuler_btn)
-        self.solve_btn = QtWidgets.QPushButton(Solver)
-        self.solve_btn.setDefault(True)
-        self.solve_btn.setObjectName("solve_btn")
-        self.horizontalLayout.addWidget(self.solve_btn)
+        self.resoudre_btn = QtWidgets.QPushButton(Solver)
+        self.resoudre_btn.setDefault(True)
+        self.resoudre_btn.setObjectName("solve_btn")
+        self.horizontalLayout.addWidget(self.resoudre_btn)
         self.reset_btn = QtWidgets.QPushButton(Solver)
         self.reset_btn.setObjectName("reset_btn")
         self.horizontalLayout.addWidget(self.reset_btn)
@@ -68,9 +68,9 @@ class Ui_Solver(object):
 
     def retranslateUi(self, Solver):
         _translate = QtCore.QCoreApplication.translate
-        Solver.setWindowTitle(_translate("Solver", "PyDoku Solver"))
-        self.label.setText(_translate("Solver", "Enter the puzzle below, then hit \'Solve\' to show solution."))
-        self.annuler_btn.setText(_translate("Solver", "Cancel"))
-        self.solve_btn.setText(_translate("Solver", "Solve"))
+        Solver.setWindowTitle(_translate("Solver", "Sudoku 9000 Solver"))
+        self.label.setText(_translate("Solver", "Entrez la grille puis cliquez sur \'Resoudre\' pour afficher la solution."))
+        self.annuler_btn.setText(_translate("Solver", "Annuler"))
+        self.resoudre_btn.setText(_translate("Resoudre", "Résoudre"))
         self.reset_btn.setText(_translate("Solver", "Reset"))
 

@@ -15,7 +15,7 @@ class Menu(QDialog, Ui_Menu):
         super(Menu, self).__init__(parent)
         self.setupUi(self)
         self.play_btn.clicked.connect(self.openPlay)
-        #self.resoudre_btn.clicked.connect(self.openSolver)
+        self.resoudre_btn.clicked.connect(self.openSolver)
 
     def openPlay(self):
         global x
@@ -86,10 +86,10 @@ class Jeu(QDialog, Ui_Play):
                     pass
 
     def verif(self):
-        grille_copy=copy.copy(grille)
+        grille_copy=copy.deepcopy(grille)
         solver=SolvFunc(grille_copy)
         solver.solve()
-        if grille_copy==grille:
+        if grille_copy.compare(grille):
             msg=QMessageBox()
             msg.setWindowTitle("Vérification")
             msg.setText("Sudoku réussi, félicitations!")
@@ -104,7 +104,7 @@ class Solver(QDialog, Ui_Solver):
     def __init__(self, parent=None):
         super(Solver, self).__init__(parent)
         self.setupUi(self, x, y)
-        self.solve_btn.clicked.connect(self.solveClick)
+        self.resoudre_btn.clicked.connect(self.solveClick)
         self.reset_btn.clicked.connect(self.tableWidget.clear)
         self.annuler_btn.clicked.connect(self.close)
 
@@ -118,7 +118,7 @@ class Solver(QDialog, Ui_Solver):
                     item = 0
                 else:
                     item = item.text()
-                if int(item) not in range(0, x * y + 1):
+                if item not in [str(i) for i in range(0, x * y + 1)]:
                     item = 0
                 row.append(int(item))
             grille_ihm.append(row[:])

@@ -4,9 +4,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Menu(object):
     def setupUi(self, Menu):
         Menu.setObjectName("Menu")
-        Menu.resize(298, 141)
+        Menu.resize(302, 144)
         self.widget = QtWidgets.QWidget(Menu)
-        self.widget.setGeometry(QtCore.QRect(10, 11, 280, 118))
+        self.widget.setGeometry(QtCore.QRect(11, 12, 280, 118))
         self.widget.setObjectName("widget")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.widget)
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
@@ -38,6 +38,7 @@ class Ui_Menu(object):
         font.setWeight(50)
         self.label_3.setFont(font)
         self.label_3.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
         self.verticalLayout_2.addWidget(self.label_3)
         self.horizontalLayout.addLayout(self.verticalLayout_2)
@@ -50,6 +51,7 @@ class Ui_Menu(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_2.setFont(font)
+        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.verticalLayout.addWidget(self.label_2)
         self.horizontalLayout.addLayout(self.verticalLayout)
@@ -59,6 +61,9 @@ class Ui_Menu(object):
         self.play_btn = QtWidgets.QPushButton(self.widget)
         self.play_btn.setObjectName("play_btn")
         self.horizontalLayout_2.addWidget(self.play_btn)
+        self.resoudre_btn = QtWidgets.QPushButton(self.widget)
+        self.resoudre_btn.setObjectName("resoudre_btn")
+        self.horizontalLayout_2.addWidget(self.resoudre_btn)
         self.verticalLayout_3.addLayout(self.horizontalLayout_2)
 
         self.retranslateUi(Menu)
@@ -71,3 +76,4 @@ class Ui_Menu(object):
         self.label_3.setText(_translate("Menu", "Largeur"))
         self.label_2.setText(_translate("Menu", "Hauteur"))
         self.play_btn.setText(_translate("Menu", "Jouer"))
+        self.resoudre_btn.setText(_translate("Menu", "Résoudre"))
