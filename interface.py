@@ -6,7 +6,7 @@ from sudoku_jeu import Ui_Play
 from sudoku_solver import Ui_Solver
 import main
 from solv_func import SolvFunc
-import play
+import generator
 
 
 class Menu(QDialog, Ui_Menu):
@@ -52,12 +52,13 @@ class Jeu(QDialog, Ui_Play):
 
     def nouvClick(self):
         global grille
-        grille = play.genPuzzle()
+        gen=generator.Generator(x,y)
+        grille = gen.generate()
         for l, ligne_bloc in enumerate(self.bloc):
             for b, blocs_cases in enumerate(ligne_bloc):
                 for i in range(y):
                     for j in range(x):
-                        val = grille[i + l * 3][j + b * 3]
+                        val = grille.bloc(l*y+b)[x*i+j].sol
                         if val != 0:  # si un chiffre est présent dans la grille générée
                             item = QTableWidgetItem(str(val))
                             item.setFlags(Qt.ItemIsSelectable
@@ -77,7 +78,7 @@ class Jeu(QDialog, Ui_Play):
                         cur = self.bloc[i][j].currentColumn()
                         cur2 = self.bloc[i][j].currentRow()
                         # print(i*y+j,cur,cur2,val)
-                        grille.bloc[i][cur2 * y + cur].set(val)
+                        grille.bloc[i][cur2 * y + cur].set(int(val))
                 except AttributeError:  # sert lors de l'intialisation de l'ihm
                     pass
 
