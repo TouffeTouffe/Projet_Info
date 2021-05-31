@@ -4,7 +4,6 @@ from PyQt5.QtCore import Qt
 from sudoku_menu2 import Ui_Menu
 from sudoku_jeu import Ui_Play
 from sudoku_solver import Ui_Solver
-from PyQt5 import QtCore, QtGui, QtWidgets
 import main
 from solv_func import SolvFunc
 import play
@@ -15,7 +14,7 @@ class Menu(QDialog, Ui_Menu):
         super(Menu, self).__init__(parent)
         self.setupUi(self)
         self.play_btn.clicked.connect(self.openPlay)
-        self.solve_btn.clicked.connect(self.openSolver)
+        self.resoudre_btn.clicked.connect(self.openSolver)
 
     def openPlay(self):
         global x
@@ -32,6 +31,7 @@ class Menu(QDialog, Ui_Menu):
         y = int(self.lineEdit.text())
         self.solver = Solver(self)
         self.solver.show()
+
 
 class Jeu(QDialog, Ui_Play):
     def __init__(self, parent=None):
@@ -68,7 +68,7 @@ class Jeu(QDialog, Ui_Play):
                 blocs_cases.clearSelection()
 
     def modif(self):
-        #print("modif!")
+        # print("modif!")
         for i in range(x):
             for j in range(y):
                 try:
@@ -76,43 +76,46 @@ class Jeu(QDialog, Ui_Play):
                     if val:
                         cur = self.bloc[i][j].currentColumn()
                         cur2 = self.bloc[i][j].currentRow()
-                        #print(i*y+j,cur,cur2,val)
+                        # print(i*y+j,cur,cur2,val)
                         grille.bloc[i][cur2 * y + cur].set(val)
-                except AttributeError: # sert lors de l'intialisation de l'ihm
+                except AttributeError:  # sert lors de l'intialisation de l'ihm
                     pass
+
 
 class Solver(QDialog, Ui_Solver):
     def __init__(self, parent=None):
         super(Solver, self).__init__(parent)
-        self.setupUi(self,x,y)
+        self.setupUi(self, x, y)
         self.solve_btn.clicked.connect(self.solveClick)
         self.reset_btn.clicked.connect(self.tableWidget.clear)
         self.annuler_btn.clicked.connect(self.close)
 
     def solveClick(self):
         grille_ihm = []
-        for i in range(x*y):
+        for i in range(x * y):
             row = []
-            for j in range(x*y):
+            for j in range(x * y):
                 item = self.tableWidget.item(i, j)
-                if item == None:
+                if item is None:
                     item = 0
                 else:
                     item = item.text()
-                if int(item) not in range(0,x*y+1):
+                if int(item) not in range(0, x * y + 1):
                     item = 0
                 row.append(int(item))
             grille_ihm.append(row[:])
-        grille_backend=main.grille()
-        grille_backend.importGrille(grille_ihm,x,y)
-        solv = SolvFunc(grille_backend)
+        grille_backend = main.grille()
+        grille_backend.importGrille(grille_ihm, x, y)
+        solver = SolvFunc(grille_backend)
+        solver.solve()
         self.showSolution(grille_backend)
 
-    def showSolution(self, grille):
-        for i in range(x*y):
-            for j in range(x*y):
-                item = QTableWidgetItem(str(grille[i][j].sol))
+    def showSolution(self, g):
+        for i in range(x * y):
+            for j in range(x * y):
+                item = QTableWidgetItem(str(g[i][j].sol))
                 self.tableWidget.setItem(i, j, item)
+
 
 if __name__ == '__main__':
     order66 = QApplication(sys.argv)
