@@ -52,7 +52,7 @@ class Jeu(QDialog, Ui_Play):
 
     def nouvClick(self):
         global grille
-        gen=generator.Generator(x,y)
+        gen=generator.Generator(x, y)
         grille = gen.generate()
         for l, ligne_bloc in enumerate(self.bloc):
             for b, blocs_cases in enumerate(ligne_bloc):
@@ -77,8 +77,9 @@ class Jeu(QDialog, Ui_Play):
                     if val:
                         cur = self.bloc[i][j].currentColumn()
                         cur2 = self.bloc[i][j].currentRow()
-                        # print(i*y+j,cur,cur2,val)
-                        grille.bloc[i][cur2 * y + cur].set(int(val))
+                        #print(i*y+j,cur,cur2,val)
+                        grille.bloc(i*y+j)[cur2 * x + cur].set(int(val))
+                        #print(grille)
                 except AttributeError:  # sert lors de l'intialisation de l'ihm
                     pass
 
