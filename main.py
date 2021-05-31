@@ -66,4 +66,3 @@ from backtrack import backtrack
 from solv_func import SolvFunc
 solv=backtrack(g)
 solv2=SolvFunc(g)
-print(solv)
