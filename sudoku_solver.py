@@ -12,8 +12,6 @@ class Ui_Solver(object):
     def setupUi(self, Solver,x,y):
         Solver.setObjectName("Solver")
         Solver.resize(296, 344)
-        Solver.setMinimumSize(QtCore.QSize(296, 344))
-        Solver.setMaximumSize(QtCore.QSize(296, 344))
         self.verticalLayout = QtWidgets.QVBoxLayout(Solver)
         self.verticalLayout.setObjectName("verticalLayout")
         self.label = QtWidgets.QLabel(Solver)
@@ -69,7 +67,7 @@ class Ui_Solver(object):
     def retranslateUi(self, Solver):
         _translate = QtCore.QCoreApplication.translate
         Solver.setWindowTitle(_translate("Solver", "Sudoku 9000 Solver"))
-        self.label.setText(_translate("Solver", "Entrez la grille puis cliquez sur \'Resoudre\' pour afficher la solution."))
+        self.label.setText(_translate("Solver", "Entrez la grille puis cliquez sur \'Résoudre\' pour afficher la solution."))
         self.annuler_btn.setText(_translate("Solver", "Annuler"))
         self.resoudre_btn.setText(_translate("Resoudre", "Résoudre"))
         self.reset_btn.setText(_translate("Solver", "Reset"))
