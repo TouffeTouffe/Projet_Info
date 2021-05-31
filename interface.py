@@ -14,7 +14,7 @@ class Menu(QDialog, Ui_Menu):
         super(Menu, self).__init__(parent)
         self.setupUi(self)
         self.play_btn.clicked.connect(self.openPlay)
-        self.resoudre_btn.clicked.connect(self.openSolver)
+        #self.resoudre_btn.clicked.connect(self.openSolver)
 
     def openPlay(self):
         global x
