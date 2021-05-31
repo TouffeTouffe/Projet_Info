@@ -52,17 +52,19 @@ class Jeu(QDialog, Ui_Play):
         self.nouvClick()
         self.annuler_btn.clicked.connect(self.close)
         self.nouv_btn.clicked.connect(self.nouvClick)
-        self.verif_btn.clicked.connect((self.verif))
+        self.verif_btn.clicked.connect(self.verif)
 
     def nouvClick(self):
         global grille
-        gen=generator.Generator(x, y)
+        global grille_origine
+        gen = generator.Generator(x, y)
         grille = gen.generate()
+        grille_origine=copy.deepcopy(grille)
         for l, ligne_bloc in enumerate(self.bloc):
             for b, blocs_cases in enumerate(ligne_bloc):
                 for i in range(y):
                     for j in range(x):
-                        val = grille.bloc(l*y+b)[x*i+j].sol
+                        val = grille.bloc(l * y + b)[x * i + j].sol
                         if val != 0:  # si un chiffre est présent dans la grille générée
                             item = QTableWidgetItem(str(val))
                             item.setFlags(Qt.ItemIsSelectable
@@ -74,33 +76,34 @@ class Jeu(QDialog, Ui_Play):
 
     def modif(self):
         # print("modif!")
-        for i in range(x):
+        for i in range(x): # on cherche le bloc modifié
             for j in range(y):
                 try:
                     val = self.bloc[i][j].currentItem().text()
-                    if val:
+                    if val: #fausse alerte (arrive parfois lorsque que l'on clique sur une autre cellule après avoir entré un nombre)
                         cur = self.bloc[i][j].currentColumn()
                         cur2 = self.bloc[i][j].currentRow()
-                        #print(i*y+j,cur,cur2,val)
-                        grille.bloc(i*y+j)[cur2 * x + cur].set(int(val))
-                        #print(grille)
+                        # print(i*y+j,cur,cur2,val)
+                        grille.bloc(i * y + j)[cur2 * x + cur].set(int(val)) #mise à jour de la grille
+                        # print(grille)
                 except AttributeError:  # sert lors de l'intialisation de l'ihm
                     pass
 
     def verif(self):
-        grille_copy=copy.deepcopy(grille)
-        solver=SolvFunc(grille_copy)
+        grille_copy = copy.deepcopy(grille_origine)
+        solver = SolvFunc(grille_copy)
         solver.solve()
-        if grille_copy.compare(grille):
-            msg=QMessageBox()
+        if grille_copy.compare(grille): #la grille que l'on a rentrée correspond à celle résolue par l'IA
+            msg = QMessageBox()
             msg.setWindowTitle("Vérification")
             msg.setText("Sudoku réussi, félicitations!")
-            x=msg.exec_()
+            msg.exec_()
         else:
             msg = QMessageBox()
             msg.setWindowTitle("Vérification")
             msg.setText("Sudoku non conforme, dommage")
-            x=msg.exec_()
+            msg.exec_()
+
 
 class Solver(QDialog, Ui_Solver):
     def __init__(self, parent=None):
@@ -111,7 +114,7 @@ class Solver(QDialog, Ui_Solver):
         self.annuler_btn.clicked.connect(self.close)
 
     def solveClick(self):
-        grille_ihm = []
+        grille_ihm = []  # on rentre tous les nombres dans une liste
         for i in range(x * y):
             row = []
             for j in range(x * y):
@@ -125,7 +128,7 @@ class Solver(QDialog, Ui_Solver):
                 row.append(int(item))
             grille_ihm.append(row[:])
         grille_backend = main.grille()
-        grille_backend.importGrille(grille_ihm, x, y)
+        grille_backend.importGrille(grille_ihm, x, y)  # on crée la grille correspondante pour pouvoir la résoudre
         solver = SolvFunc(grille_backend)
         solver.solve()
         self.showSolution(grille_backend)
