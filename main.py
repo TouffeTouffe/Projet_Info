@@ -58,6 +58,22 @@ class grille(list):
                     B.append(self[i][j])
         return B
 
+    def compare(self,f):
+        if type(f) != grille:
+            raise TypeError("ce n'est pas une grille")
+        X=self.x
+        X1=f.x
+        Y=self.y
+        Y1=f.y
+        if X != X1 or Y != Y1:
+            return False
+        n=X*Y
+        for i in range(n):
+            for j in range(n):
+                if self[i][j].sol != f[i][j].sol:
+                    return False
+        return True
+
 
 g = grille()
 G = [[1, 0, 3, 0], [3, 0, 1, 2], [4, 0, 2, 3], [2, 0, 4, 1]]
