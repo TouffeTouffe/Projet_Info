@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QDialog, QTableWidgetItem
+from PyQt5.QtWidgets import QApplication, QDialog, QTableWidgetItem, QMessageBox
 from PyQt5.QtCore import Qt
 from sudoku_menu2 import Ui_Menu
 from sudoku_jeu import Ui_Play
@@ -7,6 +7,7 @@ from sudoku_solver import Ui_Solver
 import main
 from solv_func import SolvFunc
 import generator
+import copy
 
 
 class Menu(QDialog, Ui_Menu):
@@ -49,6 +50,7 @@ class Jeu(QDialog, Ui_Play):
         self.nouvClick()
         self.annuler_btn.clicked.connect(self.close)
         self.nouv_btn.clicked.connect(self.nouvClick)
+        self.verif_btn.clicked.connect((self.verif))
 
     def nouvClick(self):
         global grille
@@ -83,6 +85,20 @@ class Jeu(QDialog, Ui_Play):
                 except AttributeError:  # sert lors de l'intialisation de l'ihm
                     pass
 
+    def verif(self):
+        grille_copy=copy.copy(grille)
+        solver=SolvFunc(grille_copy)
+        solver.solve()
+        if grille_copy==grille:
+            msg=QMessageBox()
+            msg.setWindowTitle("Vérification")
+            msg.setText("Sudoku réussi, félicitations!")
+            x=msg.exec_()
+        else:
+            msg = QMessageBox()
+            msg.setWindowTitle("Vérification")
+            msg.setText("Sudoku non conforme, dommage")
+            x=msg.exec_()
 
 class Solver(QDialog, Ui_Solver):
     def __init__(self, parent=None):
