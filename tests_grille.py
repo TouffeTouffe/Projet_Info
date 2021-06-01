@@ -16,7 +16,7 @@ class TestGrille(unittest.TestCase):
         self.assertEqual(g[3][2].colonne_ap, 2)
         self.assertEqual(g[1][2].ligne_ap, 1)
 
-    def testSolvFonctions(self):
+    def testSolverFunctions(self):
         G = [[1, 0, 3, 0], [3, 0, 1, 2], [4, 0, 2, 3], [2, 0, 4, 1]]
         T = [[1, 0, 3, 0], [3, 0, 1, 2], [4, 1, 2, 3], [2, 0, 4, 1]]
         g = main.grille()
@@ -27,7 +27,7 @@ class TestGrille(unittest.TestCase):
         solv.celib(g.ligne(0))
         solv.celib(g.ligne(2))
         solv.sol(g.ligne(2))
-        self.assertEqual(g[0][1].possibilites,[2,4])
+        self.assertEqual(g[0][1].possibilites, [2, 4])
         self.assertTrue(g.compare(t))
 
     def testSolv(self):
