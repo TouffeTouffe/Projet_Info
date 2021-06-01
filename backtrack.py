@@ -1,7 +1,10 @@
-class Backtrack:
+from solver import Solver
 
-    def __init__(self, g):
-        self.grille = g
+
+class Backtrack(Solver):
+
+    def __init__(self,g):
+        super().__init__(g)
 
     def test_complet(self):
         n = self.grille.x * self.grille.y
@@ -31,7 +34,7 @@ class Backtrack:
                     return i, j
         return None
 
-    def resoudre(self):
+    def solve(self):
         case = self.vide()
         if not case:
             return True
