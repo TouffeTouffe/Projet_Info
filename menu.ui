@@ -6,18 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>298</width>
-    <height>141</height>
+    <width>302</width>
+    <height>144</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Sudoku 900</string>
+   <string>Sudoku 9000</string>
   </property>
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>11</y>
+     <x>11</x>
+     <y>12</y>
      <width>280</width>
      <height>118</height>
     </rect>
@@ -72,6 +72,9 @@
           <property name="text">
            <string>Largeur</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
          </widget>
         </item>
        </layout>
@@ -83,8 +86,16 @@
         </item>
         <item>
          <widget class="QLabel" name="label_2">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>Hauteur</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
@@ -95,16 +106,16 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QPushButton" name="solve_btn">
+       <widget class="QPushButton" name="play_btn">
         <property name="text">
-         <string>Solver</string>
+         <string>Jouer</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="play_btn">
+       <widget class="QPushButton" name="resoudre_btn">
         <property name="text">
-         <string>Jouer</string>
+         <string>Résoudre</string>
         </property>
        </widget>
       </item>
