@@ -7,8 +7,8 @@ from solv_func import SolvFunc
 class Generator:
 
     def __init__(self,X,Y,level=1):
-        self.x=X
-        self.y=Y
+        self.x = X
+        self.y = Y
         self.level=level
 
 
