@@ -27,7 +27,7 @@ class TestGrille(unittest.TestCase):
         solv.celib(g.ligne(0))
         solv.celib(g.ligne(2))
         solv.sol(g.ligne(2))
-        self.assertEqual(g[0][1].possibilites, [2, 4])
+        self.assertEqual(g[0][1].possibilites,[2,4])
         self.assertTrue(g.compare(t))
 
     def testSolv(self):
@@ -41,7 +41,7 @@ class TestGrille(unittest.TestCase):
         s.importGrille(S, 2, 2)
         solv1 = Backtrack(g1)
         solv2 = SolvFunc(g2)
-        solv1.resoudre()
+        solv1.solve()
         solv2.solve()
         self.assertTrue(g1.compare(s))
         self.assertTrue(g2.compare(s))

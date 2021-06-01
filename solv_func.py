@@ -1,10 +1,11 @@
 import copy
+from solver import Solver
 
 
-class SolvFunc:
+class SolvFunc(Solver):
 
-    def __init__(self, g):
-        self.grille = g
+    def __init__(self,g):
+        super().__init__(g)
 
     def sol(self, l):
         for cases in l:
