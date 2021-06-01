@@ -1,3 +1,7 @@
+from backtrack import Backtrack
+from solv_func import SolvFunc
+
+
 class case:
     def __init__(self, n, l, c, k):
         self.sol = 0
@@ -21,7 +25,7 @@ class grille(list):
         self.x = 0
         self.y = 0
 
-    def importGrille(self, g, X, Y):
+    def importGrille(self, liste, X, Y):
         self.x = X
         self.y = Y
         n = X * Y
@@ -30,9 +34,9 @@ class grille(list):
             for j in range(n):
                 k = self.y * (i // self.y) + (j // self.x)
                 c = case(n, i, j, k)
-                if g[i][j] != 0:
-                    c.set(g[i][j])
-                    if g[i][j] > X * Y:
+                if liste[i][j] != 0:
+                    c.set(liste[i][j])
+                    if liste[i][j] > X * Y:
                         raise ValueError(
                             "Nombre trop gros")  # on ne peut pas faire rentrer un nombre >n dans un carré à n cases
                 L.append(c)
@@ -58,16 +62,17 @@ class grille(list):
                     B.append(self[i][j])
         return B
 
-    def compare(self,f):
+    def compare(self, f):
         if type(f) != grille:
             raise TypeError("ce n'est pas une grille")
-        X=self.x
-        X1=f.x
-        Y=self.y
-        Y1=f.y
+        X = self.x
+        X1 = f.x
+        Y = self.y
+        Y1 = f.y
         if X != X1 or Y != Y1:
+            print("mauvaise taille")
             return False
-        n=X*Y
+        n = X * Y
         for i in range(n):
             for j in range(n):
                 if self[i][j].sol != f[i][j].sol:
@@ -75,10 +80,9 @@ class grille(list):
         return True
 
 
-g = grille()
-G = [[1, 0, 3, 0], [3, 0, 1, 2], [4, 0, 2, 3], [2, 0, 4, 1]]
-g.importGrille(G, 2, 2)
-from backtrack import backtrack
-from solv_func import SolvFunc
-solv=backtrack(g)
-solv2=SolvFunc(g)
+if __name__ == '__main__':
+    g = grille()
+    G = [[1, 0, 3, 0], [3, 0, 1, 2], [4, 0, 2, 3], [2, 0, 4, 1]]
+    g.importGrille(G, 2, 2)
+    solv = Backtrack(g)
+    solv2 = SolvFunc(g)

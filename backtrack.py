@@ -1,4 +1,4 @@
-class backtrack:
+class Backtrack:
 
     def __init__(self, g):
         self.grille = g

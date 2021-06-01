@@ -7,6 +7,7 @@ from sudoku_jeu import Ui_Play
 from sudoku_solver import Ui_Solver
 import main
 from solv_func import SolvFunc
+from backtrack import Backtrack
 import generator
 import copy
 
@@ -89,10 +90,14 @@ class Jeu(QDialog, Ui_Play):
                     pass
 
     def verif(self):
-        grille_copy = copy.deepcopy(grille_origine)
-        solver = SolvFunc(grille_copy)
+        # solver = Backtrack(grille_copy)
+        # solver.resoudre()
+        solver = SolvFunc(grille_origine)
+        print(grille_origine)
         solver.solve()
-        if grille_copy.compare(grille):  # la grille que l'on a rentrée correspond à celle résolue par l'IA
+        print(grille)
+        print(grille_origine)
+        if grille_origine.compare(grille):  # la grille que l'on a rentrée correspond à celle résolue par l'IA
             msg = QMessageBox()
             msg.setWindowTitle("Vérification")
             msg.setText("Sudoku réussi, félicitations!")
