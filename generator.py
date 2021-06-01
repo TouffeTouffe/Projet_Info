@@ -6,41 +6,32 @@ from solv_func import SolvFunc
 
 class Generator:
 
-    def __init__(self,X,Y,level=1):
+    def __init__(self, X, Y, level=1):
         self.x = X
         self.y = Y
-        self.level=level
+        self.level = level
 
 
-    def generate(self):
+    def generate(self) :
 
-        lvl=self.level
-        XX=self.x
-        YY=self.y
-        n=XX*YY
-        l=[]
-        Grille=[]
-        llignes=[]
-        lcolonnes=[]
-        colonnek=[]
-        ligne=[]
-        chiffe=0
-        nbtry=0
-
+        lvl = self.level
+        XX = self.x
+        YY = self.y
+        n = XX*YY
+        l = []
+        lcolonnes = []
+        #nbtry = 0
         Gbase = grille()
-        gbase=[]
+        gbase = []
 
+        for i in range(n):
+            l.append(i+1)
 
         """gorigine = [[1, 2, 3, 4, 5, 6, 7, 8, 9], [4, 5, 6, 7, 8, 9, 1, 2, 3], [7, 8, 9, 1, 2, 3, 4, 5, 6], 
                     [2, 3, 4, 5, 6, 7, 8, 9, 1], [3, 4, 5, 6, 7, 8, 9, 1, 2], [5, 6, 7, 8, 9, 1, 2, 3, 4], 
                     [6, 7, 8, 9, 1, 2, 3, 4, 5], [8, 9, 1, 2, 3, 4, 5, 6, 7], [9, 1, 2, 3, 4, 5, 6, 7, 8]]
         """
-
-
-
-        for i in range(n):
-            l.append(i+1)
-
+    # Création de la grille complète de base
         depart = random.choice(l)     #prend au hasard un chiffre pour le placer en haut à gauche
         for i in range(n):
             lignebase = []
@@ -51,11 +42,10 @@ class Generator:
                     lignebase.append((depart + j + i%YY*XX+i//YY) % n)
             gbase.append(lignebase)
 
-
-
-        lN=range(n)
-        lXX=range(XX)
-        lYY=range(YY)
+    # Création de la grille complète mélangée
+        lN = range(n)
+        lXX = range(XX)
+        lYY = range(YY)
 
         for i in range(n):
             lcolonnes.append([])
@@ -69,14 +59,7 @@ class Generator:
             for j in range(n):
                 gbase[j][a], gbase[j][a//XX*XX+b]= gbase[j][a//XX*XX+b], gbase[j][a]
 
-
-
-
-
-
-
-
-
+    # Création de la grille avec trous
         nbtrous=0
         Ltrous=[]
         sauvegarde=0
@@ -97,17 +80,17 @@ class Generator:
             c, d = random.choice(Lindices), random.choice(Lindices)        # je choisis au hasard un couple de coordonnées pour mettre un trou
 
             while [c,d] in Ltrous:
-                c,d=random.choice(Lindices),random.choice(Lindices)        # cette boucle s'assure que l'on ne troue pas la grille deux fois au même endroit
+                c, d = random.choice(Lindices), random.choice(Lindices)        # cette boucle s'assure que l'on ne troue pas la grille deux fois au même endroit
 
 
-            sauvegarde=gbase[c][d]
-            gbase[c][d]=0
+            sauvegarde = gbase[c][d]
+            gbase[c][d] = 0
             try:
-                Gbase=grille()
-                solution=SolvFunc(Gbase.importGrille(gbase, XX, YY))       # on vérifie à chaque fois si la grille est toujours soluble, sinon on remet le terme enlevé et on reprend un nouveau trou
+                Gbase = grille()
+                solution = SolvFunc(Gbase.importGrille(gbase, XX, YY))       # on vérifie à chaque fois si la grille est toujours soluble, sinon on remet le terme enlevé et on reprend un nouveau trou
             except ValueError:
-                flag=False
-                gbase[c][d]=sauvegarde
+                flag = False
+                gbase[c][d] = sauvegarde
                 pass
             """for i in range(10):                                          # cette partie en commentaire avait pour but de vérifier l'unicité de la solution, mais étant donné le fait que l'on
                 Gbase = grille()                                            # teste les solutions toujours avec le même solveur, qui résoud toujours avec la même logique, il nous renvoie toujours une seule solution.
@@ -117,18 +100,12 @@ class Generator:
                     flag=flag and True
                 else:
                     flag=flag and False"""
-
-
-            if flag==True:
-                cpt+=1
+            if flag == True:
+                cpt += 1
             else:
-                flag=True
+                flag = True
 
-
-
-
-
-        Gfin=grille()
+        Gfin = grille()
         Gfin.importGrille(gbase, XX, YY)   # je génère la grille et la retourne
 
         return Gfin
