@@ -105,10 +105,10 @@ class SolvFunc(Solver):
                 self.celib(self.grille.colonne(i))
                 self.celib(self.grille.ligne(i))
                 self.celib(self.grille.bloc(i))
-            """for lignes in self.grille:
+            for lignes in self.grille:
                 for cases in lignes:
                     if cases.sol == 0:
-                        self.candidat_bloque(cases)"""
+                        self.candidat_bloque(cases)
             for i in range(n):
                 self.sol(self.grille.colonne(i))
                 self.sol(self.grille.ligne(i))
