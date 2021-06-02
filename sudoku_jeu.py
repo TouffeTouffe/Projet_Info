@@ -43,5 +43,5 @@ class Ui_Play(object):
         _translate = QtCore.QCoreApplication.translate
         Jeu.setWindowTitle(_translate("Jeu", "Sudoku 9000"))
         self.annuler_btn.setText(_translate("Jeu", "Annuler"))
-        self.verif_btn.setText(_translate("Jeu", "Vérififer"))
+        self.verif_btn.setText(_translate("Jeu", "Vérifier"))
         self.nouv_btn.setText(_translate("Jeu", "Nouvelle grille"))

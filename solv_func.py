@@ -4,7 +4,7 @@ from solver import Solver
 
 class SolvFunc(Solver):
 
-    def __init__(self,g):
+    def __init__(self, g):
         super().__init__(g)
 
     def sol(self, l):
@@ -20,23 +20,27 @@ class SolvFunc(Solver):
             for v in val:
                 if v in cases.possibilites:
                     cases.possibilites.remove(v)
+        self.sol(l)
 
     def celib(self, l):  # https://www.sudoku129.com/grilles/tips_1.php
-        pos_unique = []
+        self.remove_pos(l) # évite un bug quand une case a plusieurs possibilités mais est seule à ne pas être remplie sur l
+        pos_uniques = []
         pos_totales = []
-        for i in l:
-            for j in i.possibilites:
+        for cases in l:
+            for j in cases.possibilites:
                 if j not in pos_totales:
-                    pos_unique.append(j)
+                    pos_uniques.append(j)
                     pos_totales.append(j)
                 else:
-                    pos_unique.remove(j)
-        if pos_unique:  # s'il y a des célibataires
-            for j in pos_unique:
-                for i in l:
-                    if j in i.possibilites:
-                        i.set(j)
+                    if j in pos_uniques:
+                        pos_uniques.remove(j)
+        if pos_uniques:  # s'il y a des célibataires
+            for val in pos_uniques:
+                for case in l:
+                    if val in case.possibilites:
+                        case.set(j)
         self.remove_pos(l)
+        self.sol(l)
 
     def candidat_bloque(self, c):  # https://www.sudoku129.com/grilles/tips_2.php
         col, lig, blc = c.colonne_ap, c.ligne_ap, c.bloc_ap
@@ -52,7 +56,7 @@ class SolvFunc(Solver):
             for cases in C:
                 if cases.bloc_ap not in b:
                     b.append(cases.bloc_ap)
-            if len(b) == 1:
+            if len(b) == 1:  # la possibilité n'est présente que dans un bloc
                 if b[0] != blc:
                     B = self.grille.bloc(b[0])
                     cases_autorisees = []
@@ -98,15 +102,15 @@ class SolvFunc(Solver):
                 self.remove_pos(self.grille.colonne(i))
                 self.remove_pos(self.grille.bloc(i))
             for i in range(n):
-                self.sol(self.grille.colonne(i))
-                self.sol(self.grille.ligne(i))
-                self.sol(self.grille.bloc(i))
-            for i in range(n):
                 self.celib(self.grille.colonne(i))
                 self.celib(self.grille.ligne(i))
                 self.celib(self.grille.bloc(i))
-            for lignes in self.grille:
+            """for lignes in self.grille:
                 for cases in lignes:
                     if cases.sol == 0:
-                        self.candidat_bloque(cases)
+                        self.candidat_bloque(cases)"""
+            for i in range(n):
+                self.sol(self.grille.colonne(i))
+                self.sol(self.grille.ligne(i))
+                self.sol(self.grille.bloc(i))
             init = False
