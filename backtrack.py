@@ -2,11 +2,12 @@ from solver import Solver
 
 
 class Backtrack(Solver):
-
+    """auteur: Léopold Poquillon"""
     def __init__(self,g):
         super().__init__(g)
 
     def test_complet(self):
+        """Renvoie True si toutes les cases ont une valeur solution affectée"""
         n = self.grille.x * self.grille.y
         for i in range(n):
             for j in range(n):
@@ -15,6 +16,7 @@ class Backtrack(Solver):
         return True
 
     def num_valide(self, num, x, y):
+        """Renvoie True si la valeur num est solution valide en position (x,y)"""
         for i in self.grille.colonne(y):
             if i.sol == num:
                 return False
@@ -27,6 +29,7 @@ class Backtrack(Solver):
         return True
 
     def vide(self):
+        """Renvoie la position d'une case vide si elle existe"""
         n = self.grille.x * self.grille.y
         for i in range(n):
             for j in range(n):
@@ -35,6 +38,7 @@ class Backtrack(Solver):
         return None
 
     def solve(self):
+        """Résout la grille avec un algorithme récursif de backtracking"""
         case = self.vide()
         if not case:
             return True

@@ -3,6 +3,7 @@ from solv_func import SolvFunc
 
 
 class case:
+    """auteur: Léopold Poquillon"""
     def __init__(self, n, l, c, k):
         self.sol = 0
         self.possibilites = list(range(1, n + 1))
@@ -14,18 +15,21 @@ class case:
         return str(self.sol)  # pour afficher la solution dans le print grille
 
     def set(self, i):
+        """ Fixe la valeur i comme solution"""
         self.sol = i
         self.possibilites = []
 
 
 # on utilise les listes par simplicité mais surtout grâce au fait que plusieurs listes peuvent pointer le même objet (ie, une case)
 class grille(list):
+    """auteurs: Léopold Poquillon et Antoine Savignac"""
     def __init__(self):
         super().__init__()
         self.x = 0
         self.y = 0
 
     def importGrille(self, liste, X, Y):
+        """permet de transformer une liste en grille"""
         self.x = X
         self.y = Y
         n = X * Y
@@ -43,15 +47,19 @@ class grille(list):
             self.append(L)
 
     def ligne(self, i):
+        """renvoie la i-ème ligne de la grille"""
         return self[i]
 
     def colonne(self, j):
+        """renvoie le j-ème colonne de la grille"""
         return [col[j] for col in self]
 
     def getBlocIndice(self, i, j):
+        """renvoie l'indice du bloc de la case en position (i,j)"""
         return self[i][j].bloc_ap
 
     def bloc(self, k):
+        """renvoie le k-ième bloc de la grille"""
         B = []
         X = self.x
         Y = self.y
@@ -63,6 +71,7 @@ class grille(list):
         return B
 
     def compare(self, f):
+        """renvoie True si les deux grilles ont les mêmes solutions"""
         if type(f) != grille:
             raise TypeError("ce n'est pas une grille")
         X = self.x

@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
+"""auteur: Léopold Poquillon"""
 class Ui_Menu(object):
     def setupUi(self, Menu):
         Menu.setObjectName("Menu")

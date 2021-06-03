@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
+"""auteur: Léopold Poquillon"""
 class Ui_Solver(object):
     def setupUi(self, Solver, x, y):
         Solver.setObjectName("Solver")

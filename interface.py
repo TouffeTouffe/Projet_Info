@@ -11,7 +11,7 @@ from solv_func import SolvFunc
 import generator
 import copy
 
-
+"""auteur: Léopold Poquillon"""
 class Menu(QDialog, Ui_Menu):
     def __init__(self, parent=None):
         super(Menu, self).__init__(parent)
@@ -21,6 +21,7 @@ class Menu(QDialog, Ui_Menu):
         self.setWindowIcon(QtGui.QIcon('icone.jpg'))
 
     def openPlay(self):
+        """S'exécute si l'utilisateur veut jouer"""
         global x
         global y
         x = int(self.lineEdit_2.text())
@@ -29,6 +30,7 @@ class Menu(QDialog, Ui_Menu):
         self.play.show()
 
     def openSolver(self):
+        """S'éxécute si l'utilisateur veut résoudre une grille"""
         global x
         global y
         x = int(self.lineEdit_2.text())
@@ -56,6 +58,7 @@ class Jeu(QDialog, Ui_Play):
         self.verif_btn.clicked.connect(self.verif)
 
     def nouvClick(self):
+        """initialise une grille et fait une copie pour le solveur"""
         global grille
         global grille_origine
         gen = generator.Generator(x, y)
@@ -75,6 +78,7 @@ class Jeu(QDialog, Ui_Play):
                 blocs_cases.clearSelection()
 
     def modif(self):
+        """Relie la grille affichée avec la grille en backend"""
         # print("modif!")
         for i in range(x):  # on cherche le bloc modifié
             for j in range(y):
@@ -90,6 +94,7 @@ class Jeu(QDialog, Ui_Play):
                     pass
 
     def verif(self):
+        """Résout la grille initiale et compare la solution avec la grille remplie par l'utilisateur"""
         # solver = Backtrack(grille_copy)
         # solver.resoudre()
         solver = SolvFunc(grille_origine)
@@ -118,6 +123,7 @@ class Solver(QDialog, Ui_Solver):
         self.annuler_btn.clicked.connect(self.close)
 
     def solveClick(self):
+        """Traduit la grille rentrée par l'utilisateur en grille, la résout et fait afficher la solution"""
         grille_ihm = []  # on rentre tous les nombres dans une liste
         for i in range(x * y):
             row = []
@@ -138,6 +144,7 @@ class Solver(QDialog, Ui_Solver):
         self.showSolution(grille_backend)
 
     def showSolution(self, g):
+        """Affiche la grille g dans l'interface"""
         for i in range(x * y):
             for j in range(x * y):
                 item = QTableWidgetItem(str(g[i][j].sol))

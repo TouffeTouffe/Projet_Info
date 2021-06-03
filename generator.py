@@ -5,7 +5,7 @@ from solv_func import SolvFunc
 
 
 class Generator:
-
+    """auteur: Antoine Savignac"""
     def __init__(self, X, Y, level=1):
         self.x = X
         self.y = Y

@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtWidgets
 
-
+"""auteur: Léopold Poquillon"""
 class Ui_Play(object):
     def setupUi(self, Jeu, x, y):
         Jeu.setObjectName("Jeu")
@@ -11,7 +11,7 @@ class Ui_Play(object):
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.blocs = []
         # print("x=", x, " y=", y)
-        for i in range(x * y):
+        for i in range(x * y): # création des x*y blocs
             self.blocs.append(QtWidgets.QTableWidget(Jeu))
             self.blocs[i].setRowCount(y)
             self.blocs[i].setColumnCount(x)

@@ -5,7 +5,7 @@ import main
 
 
 class TestGrille(unittest.TestCase):
-
+    """auteur: Léopold Poquillon"""
     def testCase(self):
         G = [[1, 0, 3, 0], [3, 0, 1, 2], [4, 0, 2, 3], [2, 0, 4, 1]]
         g = main.grille()

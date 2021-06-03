@@ -3,16 +3,18 @@ from solver import Solver
 
 
 class SolvFunc(Solver):
-
+    """auteur: Léopold Poquillon"""
     def __init__(self, g):
         super().__init__(g)
 
     def sol(self, l):
+        """si une case ne possède qu'une seule possibilité, alors elle est solution"""
         for cases in l:
             if len(cases.possibilites) == 1:
                 cases.set(cases.possibilites[0])
 
     def remove_pos(self, l):
+        """si une solution est déjà présente dans une ligne/colonne/bloc, on peut l'enlever des possibilités des cases de même ligne/colonne/bloc"""
         val = []
         for i in l:
             val.append(i.sol)
@@ -22,7 +24,8 @@ class SolvFunc(Solver):
                     cases.possibilites.remove(v)
         self.sol(l)
 
-    def celib(self, l):  # https://www.sudoku129.com/grilles/tips_1.php
+    def celib(self, l):
+        """Application de: https://www.sudoku129.com/grilles/tips_1.php"""
         self.remove_pos(l) # évite un bug quand une case a plusieurs possibilités mais est seule à ne pas être remplie sur l
         pos_uniques = []
         pos_totales = []
@@ -38,11 +41,12 @@ class SolvFunc(Solver):
             for val in pos_uniques:
                 for case in l:
                     if val in case.possibilites:
-                        case.set(j)
+                        case.set(val)
         self.remove_pos(l)
         self.sol(l)
 
-    def candidat_bloque(self, c):  # https://www.sudoku129.com/grilles/tips_2.php
+    def candidat_bloque(self, c):
+        """Application de: https://www.sudoku129.com/grilles/tips_2.php"""
         col, lig, blc = c.colonne_ap, c.ligne_ap, c.bloc_ap
         col_g = self.grille.colonne(col)
         lig_g = self.grille.ligne(lig)
