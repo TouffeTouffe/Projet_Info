@@ -30,7 +30,7 @@ class Menu(QDialog, Ui_Menu):
         self.play.show()
 
     def openSolver(self):
-        """S'éxécute si l'utilisateur veut résoudre une grille"""
+        """S'exécute si l'utilisateur veut résoudre une grille"""
         global x
         global y
         x = int(self.lineEdit_2.text())
